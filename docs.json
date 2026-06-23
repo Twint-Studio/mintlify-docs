@@ -24,10 +24,6 @@
       }
     ]
   },
-  "logo": {
-    "light": "/favicon.png",
-    "dark": "/favicon.png"
-  },
   "navbar": {
     "links": [
       {
