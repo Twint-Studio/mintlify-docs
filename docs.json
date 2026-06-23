@@ -13,14 +13,11 @@
       "index",
       {
         "group": "OpenAPI",
-        "pages": ["openapi"]
+        "pages": ["openapi/endpoints"]
       },
       {
         "group": "Lamar",
-        "pages": [
-          "lamar",
-          "lamar/custom"
-        ]
+        "pages": ["lamar/custom"]
       }
     ]
   },

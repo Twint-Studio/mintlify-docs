@@ -1,17 +1,11 @@
 ---
-title: "OpenAPI"
-description: "A re-implementation of the API with a developer friendly mindset"
+title: "Endpoints"
+description: "REST API endpoints for code bins and URL shortening"
 ---
 
-# OpenAPI
+# Codebin
 
-OpenAPI is a re-implementation of the [API](https://api.serversmp.xyz) while having a developer friendly mindset and independence from the closed source version.
-
-## Endpoints
-
-### Codebin
-
-#### Create
+## Create
 
 ```js
 POST => /codebin/create
@@ -31,7 +25,7 @@ RESPONSE => {
 }
 ```
 
-#### Get All
+## Get All
 
 ```js
 GET => /codebin/get
@@ -44,7 +38,7 @@ RESPONSE => {
 }
 ```
 
-#### Get One
+## Get One
 
 ```js
 GET => /codebin/get/:id
@@ -61,9 +55,9 @@ RESPONSE => {
 }
 ```
 
-### Shorten
+# Shorten
 
-#### Create
+## Create
 
 ```js
 POST => /shorten/create
@@ -83,7 +77,7 @@ RESPONSE => {
 }
 ```
 
-#### Get All
+## Get All
 
 ```js
 GET => /shorten/get
@@ -96,7 +90,7 @@ RESPONSE => {
 }
 ```
 
-#### Get One
+## Get One
 
 ```js
 GET => /shorten/get/:code
