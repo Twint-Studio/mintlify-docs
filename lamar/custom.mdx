@@ -3,19 +3,26 @@ title: "Custom Commands"
 description: "Write and run sandboxed JavaScript commands in Discord"
 ---
 
-# Custom Commands
+## Limits
 
-Lamar has support for custom commands which are written in JavaScript and executed in a sandboxed QuickJS environment with a **100ms timeout**.
+Custom commands run in a sandboxed QuickJS environment with the following constraints:
+
+- **Execution timeout**: 1 second per command.
+- **Memory limit**: 3MB per execution.
+- **Max replies**: 5 messages per command (subsequent calls to `reply()` are ignored).
+- **No Promises**: `async`/`await`, `.then()`, and `Promise` are disabled.
+- **No file system**: Network and Node.js API access are disabled.
 
 ## Available Objects
 
 The following objects are available globally in your custom command scripts:
 
-- `author` - The user who ran the command (`id`, `username`, `tag`, `displayAvatarURL`)
-- `channel` - The channel the command was executed in (`id`, `name`, `type`)
-- `guild` - The server the command was executed in (`id`, `name`, `memberCount`, `ownerId`)
-- `args` - Array of arguments passed after the command name
-- `reply(content)` - Sends a reply message to the channel
+- `author`: The user who ran the command (`id`, `avatar`, `name.user`, `name.global`, `name.display`).
+- `channel`: The channel the command was executed in (`id`, `name`, `type`).
+- `guild`: The server the command was executed in (`id`, `name`, `icon`, `members`).
+- `args`: Array of arguments passed after the command name.
+- `reply(text)`: Sends a reply message (max 5 per command).
+- `log(...args)`: Logs to a file attachment sent with the reply.
 
 ## Examples
 
@@ -28,9 +35,11 @@ reply('Hello from custom command!');
 ### User info
 
 ```js
-reply(`User: ${author.username} (${author.tag})
-Channel: ${channel.name}
-Guild: ${guild.name} with ${guild.memberCount} members`);
+reply(`
+  User: ${author.name.display} (${author.name.global})
+  Channel: ${channel.name}
+  Guild: ${guild.name} with ${guild.members} members
+`);
 ```
 
 ### Conditional with arguments
@@ -46,24 +55,30 @@ if (args[0] === 'ping') {
 ### Server statistics
 
 ```js
-reply(`📊 Server Statistics
-Server Name: ${guild.name}
-Total Members: ${guild.members}
-Server ID: ${guild.id}`);
+reply(`
+  📊 Server Statistics
+  Server Name: ${guild.name}
+  Total Members: ${guild.members}
+  Server ID: ${guild.id}
+`);
 ```
 
-### Author and channel info
+### Author info
 
 ```js
-reply(`Author ID: ${author.id}
-Username: ${author.username}
-Tag: ${author.tag}`);
+reply(`
+  Author ID: ${author.id}
+  Username: ${author.name.user}
+  Display name: ${author.name.display}
+`);
 ```
 
 ```js
-reply(`Channel ID: ${channel.id}
-Name: ${channel.name}
-Type: ${channel.type}`);
+reply(`
+  Channel ID: ${channel.id}
+  Name: ${channel.name}
+  Type: ${channel.type}
+`);
 ```
 
 ### Working with arguments
@@ -80,11 +95,11 @@ if (args.length > 0) {
 
 ```js
 let greeting = 'Hello';
-let name = author.username;
+let name = author.name.display;
 reply(`${greeting}, ${name}!`);
 ```
 
-### Loops (limited by 100ms timeout)
+### Loops (limited by 1s timeout)
 
 ```js
 let count = 0;
