@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Twint API",
-    "description": "REST API endpoints for code bins and URL shortening",
+    "title": "OpenAPI",
+    "description": "A re-implementation of the API with a developer friendly mindset and independent from the closed source version.",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://openapi.twint.us.kg"
+      "url": "https://api.twint.us.kg"
     }
   ],
   "paths": {

@@ -8,6 +8,9 @@
     "dark": "#4f15b8"
   },
   "favicon": "/favicon.svg",
+  "appearance": {
+    "strict": true
+  },
   "navigation": {
     "pages": [
       "index",
@@ -39,23 +42,13 @@
         "label": "Git",
         "href": "https://git.serversmp.xyz/TwintStudio"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Website",
-      "href": "https://twint.us.kg/"
-    }
+    ]
   },
   "contextual": {
     "options": [
       "copy",
       "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "perplexity"
     ]
   },
   "footer": {
