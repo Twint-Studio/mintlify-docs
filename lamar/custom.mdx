@@ -1,0 +1,95 @@
+---
+title: "Custom Commands"
+description: "Writing Discord bot custom commands in JavaScript"
+---
+
+# Custom Commands
+
+Lamar has support for custom commands which are written in JavaScript and executed in a sandboxed QuickJS environment with a **100ms timeout**.
+
+## Available Objects
+
+The following objects are available globally in your custom command scripts:
+
+- `author` - The user who ran the command (`id`, `username`, `tag`, `displayAvatarURL`)
+- `channel` - The channel the command was executed in (`id`, `name`, `type`)
+- `guild` - The server the command was executed in (`id`, `name`, `memberCount`, `ownerId`)
+- `args` - Array of arguments passed after the command name
+- `reply(content)` - Sends a reply message to the channel
+
+## Examples
+
+### Simple greeting
+
+```js
+reply('Hello from custom command!');
+```
+
+### User info
+
+```js
+reply(`User: ${author.username} (${author.tag})
+Channel: ${channel.name}
+Guild: ${guild.name} with ${guild.memberCount} members`);
+```
+
+### Conditional with arguments
+
+```js
+if (args[0] === 'ping') {
+    reply('pong');
+} else {
+    reply('I only respond to ping');
+}
+```
+
+### Server statistics
+
+```js
+reply(`📊 Server Statistics
+Server Name: ${guild.name}
+Total Members: ${guild.members}
+Server ID: ${guild.id}`);
+```
+
+### Author and channel info
+
+```js
+reply(`Author ID: ${author.id}
+Username: ${author.username}
+Tag: ${author.tag}`);
+```
+
+```js
+reply(`Channel ID: ${channel.id}
+Name: ${channel.name}
+Type: ${channel.type}`);
+```
+
+### Working with arguments
+
+```js
+if (args.length > 0) {
+    reply(`First arg: ${args[0]}`);
+} else {
+    reply('No arguments provided');
+}
+```
+
+### Using variables
+
+```js
+let greeting = 'Hello';
+let name = author.username;
+reply(`${greeting}, ${name}!`);
+```
+
+### Loops (limited by 100ms timeout)
+
+```js
+let count = 0;
+while (count < 10) {
+    reply(`Count: ${count}`);
+    count++;
+}
+```
