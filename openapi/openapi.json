@@ -1,0 +1,294 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Twint API",
+    "description": "REST API endpoints for code bins and URL shortening",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://openapi.twint.us.kg"
+    }
+  ],
+  "paths": {
+    "/codebin/create": {
+      "post": {
+        "summary": "Create a codebin",
+        "description": "Create a new codebin",
+        "operationId": "createCodebin",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["content"],
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "The contents of the codebin"
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": "The type of file to be created"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created codebin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": ["Successfully created codebin"]
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "The id for the codebin"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/codebin/get": {
+      "get": {
+        "summary": "Get all codebins",
+        "description": "Get all codebins",
+        "operationId": "getCodebins",
+        "responses": {
+          "200": {
+            "description": "Successfully fetched all codebins",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": ["Successfully fetched all codebin"]
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of codebin objects",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/codebin/get/{id}": {
+      "get": {
+        "summary": "Get a codebin",
+        "description": "Get a specified codebin by ID",
+        "operationId": "getCodebin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The id for the codebin"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched codebin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": ["Successfully fetched codebin"]
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Object with shortened data"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shorten/create": {
+      "post": {
+        "summary": "Create a shortened URL",
+        "description": "Create a new shortened URL",
+        "operationId": "createShorten",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["url"],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "The code for the shortened URL"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "The URL to shorten"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created shortened URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": ["Successfully created shorten"]
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The code for the shortened URL"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shorten/get": {
+      "get": {
+        "summary": "Get all shortened URLs",
+        "description": "Get all shortened URLs",
+        "operationId": "getShortens",
+        "responses": {
+          "200": {
+            "description": "Successfully fetched all shortened URLs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": ["Successfully fetched all shorten"]
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Array of shortened URL objects",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shorten/get/{code}": {
+      "get": {
+        "summary": "Get a shortened URL",
+        "description": "Get a specified shortened URL by code",
+        "operationId": "getShorten",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The code for the shortened URL"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched shortened URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [true]
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": ["Successfully fetched shorten"]
+                    },
+                    "data": {
+                      "type": "object",
+                      "description": "Object with shortened data"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

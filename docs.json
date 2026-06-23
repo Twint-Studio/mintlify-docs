@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Twint",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#641ae6",
+    "light": "#875bf5",
+    "dark": "#4f15b8"
   },
   "favicon": "/favicon.svg",
   "navigation": {
@@ -13,7 +13,7 @@
       "index",
       {
         "group": "OpenAPI",
-        "pages": ["openapi/endpoints"]
+        "openapi": "openapi/openapi.json"
       },
       {
         "group": "Lamar",
